@@ -38,6 +38,7 @@ Therefore, we can update the database by submitting Push to the Repository in Gi
 In this way, we have completed the preliminary preparation for the establishment of the database.
 
 ### Read and write of DB Repository
+
 There are two ways to read and write to this DB Repository:
 
 - Use [Octokit](https://github.com/octokit) to read and write to the DB Repository
