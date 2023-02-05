@@ -27,10 +27,10 @@ Github提供了Github api、Octokit等工具来辅助我们对GitHub上托管的
 
 1. 创建一个Private仓库（下称“DB仓库”），用作你的DB仓库。
 2. 创建一个Fine-grained personal access token（下称“DB token”），并仅赋予它访问DB仓库的权限。
+    - [创建个人访问令牌——Github Docs](https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
     - 你应赋予DB token对于DB仓库的读写权限。
-    - 如果你不需要使用DB仓库的Actions等功能可以不赋予DB token其它权限。
-        - [创建个人访问令牌——Github Docs](
-https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+    - 如果需要使用使用DB仓库的Github Actions功能，可以赋予DB token关于Actions的相关权限。
+    - **不应赋予DB token其它未使用的权限**。
 
 这样，我们就完成了建立数据库的前期准备。
 
