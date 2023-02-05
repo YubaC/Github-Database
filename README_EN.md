@@ -30,7 +30,7 @@ Therefore, we can update the database by submitting Push to the Repository in Gi
 
 2. Create a fine-grained personal access token (hereinafter referred to as "DB token") and only grant it access to the DB Repository.
 
-- [Create a personal access token - Github Docs]（ https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token )
+- [Create a personal access token - Github Docs](https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 - You should give the DB token read and write permissions to the DB Repository.
 - If you need to use the Github Actions function of the DB Repository, you can give the DB token relevant permissions on Actions.
 - **The DB token should not be given other unused permissions**.
