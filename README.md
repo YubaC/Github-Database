@@ -10,6 +10,40 @@ Github Database是一个将GitHub的仓库作为数据库的解决方案。
 
 ***
 
+一些建议：
+- 使用分支
+
+```mermaid
+flowchart TD;
+    Database-->branch1\nScripts;
+    Database-->branch2\nData;
+    Database-->branch3\n...
+```
+
+Create:
+```mermaid
+sequenceDiagram
+    actor Client
+    participant Github
+    Client->>Github: put file
+    Note over Github,Client: Create file
+```
+
+Update:
+
+```mermaid
+sequenceDiagram
+    actor Client
+    participant Github
+    Client->>Github: get file
+    Github-->>Client: [file]
+    Note over Github,Client: Get the file sha.
+    Client->>Github: put file
+    Note over Github,Client: Update file by the former sha.
+```
+
+------------------
+
 <span id="safety-warning">
 
 ## 安全
@@ -54,62 +88,10 @@ Github Database是一个将GitHub的仓库作为数据库的解决方案。
     </details>
 
     <details>
-    <summary>（可选）添加一些假的token混在里面：</summary>
-
-    ```Javascript
-    // base64 encoded
-    var token = "dfghjkjdhstxgdshxjuhygDRFGYHBDFGYHUJNSBVGYHBDgvbhJNHvvUDHBJmgGHjBh"
-    // fake
-    var token2 = "fcgvhkjshbshiajnbhGFYGjhbhgguyHjgyUhjbtugyhjBhguhjghjhguyhjdsdrfeS"
-    // fake
-    var token3 = "cgfvshsvggdshfgvydgshdbsghVGUHkjnVGhhjkBtugyiHKfYUGyijhyuyhiyvBHyv"
-    ...
-    function updateDB(){
-        fetch("https://api.github.com/repos/{ Owner }/{ Repo }/contents/" + fileName, {
-            method: "put",
-            headers: {
-                Authorization: "token " + b64DecodeUnicode(token),
-                Accept: "application/vnd.github.v3+json"
-            },
-            body: ...,
-        });
-    }
-
-    //! Never used
-    function updateDB2(){
-        fetch("https://api.github.com/repos/{ Owner }/{ Repo }/contents/" + fileName, {
-            method: "put",
-            headers: {
-                ...
-                b64DecodeUnicode(token2),
-                ...
-            }
-            ...
-        });
-    }
-
-    //! Never used
-    function updateDB3(){
-        fetch("https://api.github.com/repos/{ Owner }/{ Repo }/contents/" + fileName, {
-            method: "put",
-            headers: {
-                ...
-                b64DecodeUnicode(token3),
-                ...
-            }
-            ...
-        });
-    }
-
-    ```
-    </details>
-
-    <details>
     <summary>加密后：</summary>
 
     ```
     // Magic. Do not touch.
-    // 麻鸡。勿动。
     [][(![]+[])[!+[]+!![]+!![]]+([]+{})[+!![]]+(!![]+[])[+!![]]+(!![]+[])[+[]]][([]+{})[!+[]+!![]+!![]+!![]+!![]]+([]+{})[+!![]]+([][[]]+[])[+!![]]+(![]+[])[!+[]+!![]+!![]]+(!![]+[])[+[]]+(!![]+[])[+!![]]+([][[]]+[])[+[]]+([]+{})[!+[]+!![]+!![]+!![]+!![]]+(!![]+[])[+[]]+([]+{})[+!![]]+(!![]+[])[+!![]]](([]+[][(![]+[])[!+[]+!![]+!![]]+([]+...//（太长了，后略）
     ```
     </details>
@@ -121,7 +103,7 @@ Github Database是一个将GitHub的仓库作为数据库的解决方案。
 - 建立数个不同的数据库仓库的方式来进一步降低可能的损失。
 - **所有的DB token都不应被授予admin权限**，以免数据库仓库遭到删除。
 
-## 前期准备
+### 前期准备
 
 1. 创建一个Private仓库（下称“数据库仓库”），用作你的数据库仓库。
 2. 创建一个Fine-grained personal access token（下称“DB token”），并仅赋予它访问数据库仓库的权限。
@@ -132,5 +114,5 @@ https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/c
 
 这样，我们就完成了建立数据库的前期准备。
 
-## 数据库仓库的读写
+### 数据库仓库的读写
 
