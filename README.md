@@ -2,7 +2,7 @@
 
 [English](README_EN.md)
 
-![under construction](assets/images/under-construction.gif)
+![under construction](images/under-construction.gif)
 
 ## 简介
 

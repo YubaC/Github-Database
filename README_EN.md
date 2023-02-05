@@ -2,7 +2,7 @@
 
 [简体中文](README.md)
 
-![under construction](assets/images/under-construction.gif)
+![under construction](images/under-construction.gif)
 
 ## Introduction
 
