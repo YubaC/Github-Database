@@ -4,23 +4,23 @@
 
 ## 简介
 
-Github Database是一个将GitHub的仓库作为数据库的解决方案。
+Github Database是一个将Github的仓库作为数据库的解决方案。
 
-**⚠️ 这个方案被用于网页时含有一定风险。** [详细内容](#safety-warning)
+这个方案使得我们可以在没有后端的时候完成一些简单的、**写入量不大**的数据库操作，比如对网页进行留言、评论；注册用户，等等。
 
-***
+### Warning
 
-一些建议：
-- 使用分支
+**数据库的读写量（尤其是写入量）不能过大**。
 
-```mermaid
-flowchart TD;
-    Database-->branch1\nScripts;
-    Database-->branch2\nData;
-    Database-->branch3\n...
-```
+**⚠️ 这个方案被用于网页时含有一定风险。** [查看详细内容](#safety-warning)
 
-------------------
+
+### 原理
+
+Github提供了Github api、Octokit等工具来辅助我们对GitHub上托管的仓库进行管理与控制。
+
+因此，我们可以通过向GitHub内的仓库提交Push的方式更新数据库、通过运行GitHub Actions的方式完成一些后端可以完成的操作。
+
 
 ## 运行与维护
 
@@ -30,7 +30,7 @@ flowchart TD;
 2. 创建一个Fine-grained personal access token（下称“DB token”），并仅赋予它访问DB仓库的权限。
     - 你应赋予DB token对于DB仓库的读写权限。
     - 如果你不需要使用DB仓库的Actions等功能可以不赋予DB token其它权限。
-        - [创建个人访问令牌——GitHub Docs](
+        - [创建个人访问令牌——Github Docs](
 https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
 这样，我们就完成了建立数据库的前期准备。
@@ -40,12 +40,12 @@ https://docs.github.com/zh/authentication/keeping-your-account-and-data-secure/c
 有两种方式可以实现对这个DB仓库的读写：
 
 - 使用[Octokit](https://github.com/octokit)完成对DB仓库的读写
-- 使用GitHub api完成对DB仓库的读写
+- 使用Github api完成对DB仓库的读写
 - ~~通过各种奇技淫巧完成对DB仓库的读写~~
 
 **值得注意的是，Octokit在钉钉内置的浏览器中表现不佳。** 因此，如果要开发在钉钉浏览器内也能运行的网站，我们推荐直接使用Github api。
 
-如果使用GitHub api，则可以通过如下的方式对DB仓库进行读写：
+如果使用Github api，则可以通过如下的方式对DB仓库进行读写：
 
 Create file:
 ```mermaid
